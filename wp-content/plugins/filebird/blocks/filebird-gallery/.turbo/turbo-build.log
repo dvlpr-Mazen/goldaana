@@ -1,0 +1,36 @@
+
+
+> @filebird/gallery-block@0.1.0 build /Users/joey/Documents/sites/wp/wp-content/plugins/filebird-6/blocks/filebird-gallery
+> wp-scripts build
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+assets by chunk 204 KiB (name: index)
+  assets by path [1m[32m*.css[39m[22m 33.1 KiB
+    asset [1m[32mindex-rtl.css[39m[22m 16.6 KiB [1m[32m[emitted][39m[22m (name: index)
+    asset [1m[32mindex.css[39m[22m 16.5 KiB [1m[32m[emitted][39m[22m (name: index)
+  asset [1m[32mindex.js[39m[22m 171 KiB [1m[32m[emitted][39m[22m [1m[32m[minimized][39m[22m (name: index)
+  asset [1m[32mindex.asset.php[39m[22m 194 bytes [1m[32m[emitted][39m[22m (name: index)
+assets by path [1m[32m./*.css[39m[22m 2.55 KiB
+  asset [1m[32m./style-index-rtl.css[39m[22m 1.28 KiB [1m[32m[emitted][39m[22m (name: ./style-index) (id hint: style)
+  asset [1m[32m./style-index.css[39m[22m 1.28 KiB [1m[32m[emitted][39m[22m (name: ./style-index) (id hint: style)
+asset [1m[32mrender.php[39m[22m 3.75 KiB [1m[32m[emitted][39m[22m [from: src/render.php] [1m[32m[copied][39m[22m
+asset [1m[32mblock.json[39m[22m 1.61 KiB [1m[32m[emitted][39m[22m [from: src/block.json] [1m[32m[copied][39m[22m
+Entrypoint [1mindex[39m[22m 207 KiB = 6 assets
+orphan modules 561 KiB (javascript) 1.87 KiB (runtime) [1m[33m[orphan][39m[22m 216 modules
+runtime modules 3.29 KiB 6 modules
+built modules 544 KiB (javascript) 17.8 KiB (css/mini-extract) [1m[33m[built][39m[22m
+  javascript modules 544 KiB
+    modules by path [1m../../node_modules/.pnpm/react-is@16.13.1/node_modules/react-is/[39m[22m 2.69 KiB
+      [1m../../node_modules/.pnpm/react-is@16.13.1/node_modules/react-is/index.js[39m[22m 196 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+      [1m../../node_modules/.pnpm/react-is@16.13.1/node_modules/react-is/cjs/react-is.pro...(truncated)[39m[22m 2.49 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    modules by path [1m../../node_modules/.pnpm/react-is@18.2.0/node_modules/react-is/[39m[22m 2.4 KiB
+      [1m../../node_modules/.pnpm/react-is@18.2.0/node_modules/react-is/index.js[39m[22m 196 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+      [1m../../node_modules/.pnpm/react-is@18.2.0/node_modules/react-is/cjs/react-is.pro...(truncated)[39m[22m 2.21 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    [1m./src/index.js + 195 modules[39m[22m 537 KiB [1m[31m[not cacheable][39m[22m [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    [1m../../node_modules/.pnpm/classnames@2.5.1/node_modules/classnames/index.js[39m[22m 1.49 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  modules by path [1m./src/*.scss[39m[22m 17.8 KiB
+    css ../../node_modules/.pnpm/css-loader@6.11.0_webpack@5.94.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!../../node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.30_webpack@5.94.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!../../node_modules/.pnpm/sass-loader@12.6.0_sass@1.64.2_webpack@5.94.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]![1m./src/style.scss[39m[22m 1.27 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    css ../../node_modules/.pnpm/css-loader@6.11.0_webpack@5.94.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!../../node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.30_webpack@5.94.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!../../node_modules/.pnpm/sass-loader@12.6.0_sass@1.64.2_webpack@5.94.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]![1m./src/editor.scss[39m[22m 16.5 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+webpack 5.94.0 compiled [1m[32msuccessfully[39m[22m in 2084 ms
