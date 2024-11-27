@@ -15,7 +15,7 @@ function my_custom_plugin_enqueue_scripts() {
         'my-custom-plugin-index', 
         plugin_dir_url(__FILE__) . 'index.js', 
         array('jquery'), // Dependencies (if any)
-        2.1, 
+        3.1, 
         false // Load in the footer
     );
 }
@@ -139,18 +139,18 @@ function add_custom_data_attributes_to_price_html($price, $product) {
 
 /*-----------------------------------------------------------------------------------------------*/
 
-function calculate_price($c, $livePrice, $weight = 0, $manufacturingFees = 0) {
+function calculate_price($c, $live_price_24, $weight = 0, $manufacturingFees = 0) {
     switch ($c) {
         case 18:
-            $livePrice_18 = $livePrice / 1333.3;
+            $livePrice_18 = $live_price_24 / 1333.3;
             return $weight * ($manufacturingFees + $livePrice_18) * 1.15;
 
         case 21:
-            $livePrice_21 = $livePrice / 1142.7;
+            $livePrice_21 = $live_price_24 / 1142.7;
             return $weight * ($manufacturingFees + $livePrice_21) * 1.15;
 
         case 24:
-            return $livePrice * $weight;
+            return $live_price_24 * $weight;
 
         default:
             return null; // or handle the default case if needed
@@ -187,8 +187,8 @@ function set_product_with_live_price($product_id) {
          return false;
     }
     
-    $live_price_24 = get_option('fixed-livePrice') * 121;
-    wc_add_notice('x2','error');
+    $live_price_24 =  get_option('fixed-livePrice') ;
+    wc_add_notice('x24','error');
     // if (!$live_price_24) {
     //     return false;
     // }

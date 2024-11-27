@@ -66,7 +66,8 @@ function e() {
 
 function renderProductPrice(elements, livePrice_24, calculatedValue, color) {
   elements.forEach((element) => {
-    const weight = parseFloat(element.getAttribute('data-product-weight')) || 1;
+    // const weight = parseFloat(element.getAttribute('data-product-weight')) || 1;
+    const weight = 5;
     const manufacturingFees =
       parseInt(element.getAttribute('data-product-manufacturing-fees')) || 1;
     const goldCarat =24;
@@ -87,10 +88,8 @@ function renderProductPrice(elements, livePrice_24, calculatedValue, color) {
         let livePrice_21 = livePrice_24 / 1142.7;
         calculatedValue = weight * (manufacturingFees + livePrice_21) * 1.15;
       } else if (goldCarat === 24) {
-        calculatedValue = livePrice_24 ;
-        console.log('from 24 condition ...',livePrice_24);
-        console.log('from 24 condition ...',weight );
-        console.log('from 24 condition ...',weight * livePrice_24);
+        calculatedValue = livePrice_24 * weight ;
+       
       }
     // }
 
@@ -225,8 +224,11 @@ async function initiateWebSocketConnection() {
       try {
         const data = JSON.parse(event.data);
         if (data.status === 'OK') {
-          const livePrice_24 = data.payload.bid * 121;
+          const livePrice_24 = ( data.payload.bid * 121 ) / 1000;
+            
+   
           console.log('WebSocket message received:', livePrice_24);
+          
           let calculatedValue = 1;
           const difference = livePrice_24 - (this.prev + 0.001);
           let color = difference < 0 ? '#F43F5E' : '#10B981';
