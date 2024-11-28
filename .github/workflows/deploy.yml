@@ -19,7 +19,7 @@ jobs:
         host: ${{ secrets.HOST }}          # IP أو اسم النطاق
         username: ${{ secrets.USERNAME }}  # اسم المستخدم
         password: ${{ secrets.PASSWORD }}  # كلمة المرور
-        port: 22
+        port: 65002
         script: |
           cd /home/u434968181/domains/goldaana.com/public_html/stage
           git pull origin staging
