@@ -66,32 +66,46 @@ function e() {
 
 function renderProductPrice(elements, livePrice_24, calculatedValue, color) {
   elements.forEach((element) => {
-    // const weight = parseFloat(element.getAttribute('data-product-weight')) || 1;
-    const weight = 5;
-    const manufacturingFees =
-      parseInt(element.getAttribute('data-product-manufacturing-fees')) || 1;
-    const goldCarat =24;
+      
+    const weight = parseFloat(element.getAttribute('data-product-weight')) || 1;
+    const manufacturingFees = parseFloat(element.getAttribute('data-product-manufacturing-fees')) || 1;
+    const goldCarat = parseInt(element.getAttribute('data-product-gold-carat')) ;
+
+// console.log("Raw gold carat attribute:", element.getAttribute('data-product-gold-carat'));
+// console.log("Element being processed:", element);
+// console.log(goldCarat);
     
-    // if (weight === 1 || manufacturingFees === 1 || goldCarat === 1) {
-    // } else {
-      if (goldCarat === 18) {
-        let livePrice_18 = livePrice_24 / 1333.3;
-        let calculatedValue1 =
-          weight * (manufacturingFees + livePrice_18) * 1.15;
-        // if (color === '#10B981') {
-        //   calculatedValue = calculatedValue1;
-        // }
-        color === '#10B981'
-          ? (calculatedValue = calculatedValue1 + 2)
-          : (calculatedValue = calculatedValue1 - 2);
-      } else if (goldCarat === 21) {
-        let livePrice_21 = livePrice_24 / 1142.7;
-        calculatedValue = weight * (manufacturingFees + livePrice_21) * 1.15;
-      } else if (goldCarat === 24) {
-        calculatedValue = livePrice_24 * weight ;
-       
+    switch (goldCarat) {
+      case 18: {
+        const livePrice_18 = livePrice_24 * 0.75;
+        const value_18 = weight * (manufacturingFees + livePrice_18) * 1.15;
+    
+        // Adjusting calculatedValue based on the color
+        calculatedValue = color === '#10B981' ? value_18 + 2 : value_18 - 2;
+        break;
       }
-    // }
+    
+      case 21: {
+        const livePrice_21 = livePrice_24 * 0.875;
+        const value_21 = weight * (manufacturingFees + livePrice_21) * 1.15;
+    
+        // Adjusting calculatedValue based on the color
+        calculatedValue = color === '#10B981' ? value_21 + 2 : value_21 - 2;
+        break;
+      }
+    
+      case 24: {
+        calculatedValue = livePrice_24 * weight;
+        break;
+      }
+    
+      default:
+      calculatedValue = 'بيانات ناقصه';
+        // console.warn('Invalid gold carat value:', goldCarat);
+        break;
+    }
+    
+
 
     const displayValue =
       typeof calculatedValue === 'number'
@@ -106,7 +120,7 @@ function renderProductPrice(elements, livePrice_24, calculatedValue, color) {
                     display: flex;
                     align-items: center;
                     font-family: 'Arial', sans-serif;
-                    font-size: 1.2rem;
+                    font-size: 1.3rem;
                 
                     // justify-content: start;
                 }
@@ -114,6 +128,7 @@ function renderProductPrice(elements, livePrice_24, calculatedValue, color) {
                 /* Price text */
                 .pricee {
                     font-weight: bold !important;
+                      font-size: 1.25rem; !important;
                     margin: 0px !important;
                   color: ${color} !important;
                 }
@@ -137,8 +152,8 @@ function renderProductPrice(elements, livePrice_24, calculatedValue, color) {
                 }
 
               .curencyy{
-                margin-right: 2px;
-                font-size : 1rem
+                margin-right: 4px;
+                font-size : 1.2rem
               }
 
             
@@ -146,7 +161,7 @@ function renderProductPrice(elements, livePrice_24, calculatedValue, color) {
             
             <div class="price-indicator">
              <span class="arrow" id="arrow">-</span>
-                <span class="pricee" id="livePriceEl">${displayValue}</span>
+                <span class="pricee">${displayValue}</span>
                <span class="curencyy" id="curency">ر.س</span>
             </div>
           `;
@@ -192,7 +207,7 @@ async function initiateWebSocketConnection() {
       'wss://api-streaming-capital.backend-capital.com/connect'
     );
     
-   ws.onopen =  () => {
+  ws.onopen =  () => {
     if (!localStorage.getItem('CST') || !localStorage.getItem('TOKEN')) {
         console.log('no CST and TOKEN start new Session from onOpen ...');
         // const sessionData = await startSession(); 
@@ -271,6 +286,119 @@ async function initiateWebSocketConnection() {
     );
   }
 }
+
+// let ws; // تعريف WebSocket كمتغير عام
+
+// async function verifySession(cst, token) {
+//   // التحقق من صحة الجلسة
+//   try {
+//     const response = await fetch('https://api.example.com/verify-session', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'CST': cst,
+//         'Authorization': `Bearer ${token}`,
+//       },
+//     });
+//     return response.ok; // الجلسة صالحة إذا كانت الاستجابة ناجحة
+//   } catch (error) {
+//     console.error('Error verifying session:', error);
+//     return false;
+//   }
+// }
+
+
+// async function initiateWebSocketConnection() {
+//   try {
+//     // أغلق أي اتصال WebSocket موجود
+//     if (ws && ws.readyState !== WebSocket.CLOSED) {
+//       console.log('Closing existing WebSocket connection...');
+//       ws.close();
+//     }
+
+//     let cst = localStorage.getItem('CST');
+//     let token = localStorage.getItem('TOKEN');
+
+//     if (!cst || !token ) {
+//     // if (!cst || !token || !(await verifySession(cst, token))) {
+//       console.log('Session no in storage, starting a new session...');
+//       const sessionData = await startSession();
+//       cst = sessionData.cst;
+//       token = sessionData.securityToken;
+//       localStorage.setItem('CST', cst);
+//       localStorage.setItem('TOKEN', token);
+//     }
+
+//     // إنشاء اتصال WebSocket جديد
+//     ws = new WebSocket('wss://api-streaming-capital.backend-capital.com/connect');
+
+//     ws.onopen = () => {
+//       console.log('WebSocket connection opened');
+//       if (ws.readyState === WebSocket.OPEN) {
+//         const subscriptionMessage = {
+//           destination: 'marketData.subscribe',
+//           correlationId: '100',
+//           cst,
+//           securityToken: token,
+//           payload: { epics: ['GOLD'] },
+//         };
+//         ws.send(JSON.stringify(subscriptionMessage));
+//         console.log('Subscription message sent');
+//       }
+//     };
+
+//     ws.onmessage = (event) => {
+//       try {
+//         const data = JSON.parse(event.data);
+
+//         if (data.status === 'OK') {
+//                  const livePrice_24 = ( data.payload.bid * 121.5 ) / 1000;
+//           console.log('WebSocket message received:', livePrice_24);
+
+//           let calculatedValue = 0;
+//           const difference = livePrice_24 - (this.prev || 0);
+//           const color = difference < 0 ? '#F43F5E' : '#10B981';
+//           this.prev = livePrice_24;
+
+//           const elements = document.querySelectorAll('#livePriceEl');
+//           renderProductPrice(elements, livePrice_24, calculatedValue, color);
+//         // } else if (data.payload.errorCode === 'error.invalid.session.token') {
+//         //   console.log('Invalid session token, clearing localStorage...');
+//         //   localStorage.removeItem('CST');
+//         //   localStorage.removeItem('TOKEN');
+//         }
+//       }
+//       catch (e) {
+//         console.error('Error parsing WebSocket message:', e);
+//       }
+//     };
+
+//     ws.onerror = (error) => {
+//       console.error('WebSocket error:', error);
+//     };
+
+//     ws.onclose = () => {
+//       console.log('WebSocket connection closed, retrying in 5 seconds...');
+//       setTimeout(() => {
+//         initiateWebSocketConnection(); // إعادة محاولة الاتصال
+//       }, 2000);
+//     };
+
+//     // إغلاق WebSocket عند مغادرة الصفحة
+//     window.addEventListener('beforeunload', () => {
+//       if (ws) {
+//         console.log('Closing WebSocket due to page unload...');
+//         ws.close();
+//       }
+//     });
+//   } catch (error) {
+//     console.error(
+//       'Failed to start session or establish WebSocket connection:',
+//       error
+//     );
+//   }
+// }
+
 
 
 /*-------------------------------------------------------------------------------------------------------------------*/

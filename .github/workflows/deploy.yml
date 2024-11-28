@@ -1,0 +1,26 @@
+
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: 82.112.239.93
+        username: u434968181
+        password: Mm779805678$
+        port: 65002
+        script: |
+          cd /home/u434968181/domains/goldaana.com/public_html/stage
+          git pull origin staging

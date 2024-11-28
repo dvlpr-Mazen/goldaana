@@ -15,7 +15,7 @@ function my_custom_plugin_enqueue_scripts() {
         'my-custom-plugin-index', 
         plugin_dir_url(__FILE__) . 'index.js', 
         array('jquery'), // Dependencies (if any)
-        3.1, 
+        6.3, 
         false // Load in the footer
     );
 }
