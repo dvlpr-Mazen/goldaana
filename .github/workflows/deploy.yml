@@ -1,11 +1,10 @@
-
-name: Deploy to Server
+name: Deploy to Staging Server
 
 on:
   push:
     branches:
-      - staging
-
+      - staging  # عند أي عملية push على فرع staging
+ 
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,13 +13,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Deploy via SSH
+    - name: Deploy to Staging via SSH
       uses: appleboy/ssh-action@v0.1.5
       with:
-        host: 82.112.239.93
-        username: u434968181
-        password: Mm779805678$
-        port: 65002
+        host: ${{ secrets.HOST }}          # IP أو اسم النطاق
+        username: ${{ secrets.USERNAME }}  # اسم المستخدم
+        password: ${{ secrets.PASSWORD }}  # كلمة المرور
+        port: 22
         script: |
           cd /home/u434968181/domains/goldaana.com/public_html/stage
           git pull origin staging
